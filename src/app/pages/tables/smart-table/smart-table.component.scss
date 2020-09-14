@@ -1,0 +1,25 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  nb-card {
+    transform: translate3d(0, 0, 0);
+    overflow-x: scroll;
+  }
+
+  .sort{
+    display: flex;
+  }
+  .compare {
+    margin-left: 30px;
+    margin-top: -16px;
+    transform: scale(0.7);
+  }
+
+  .position-select {
+    margin-left: 10px;
+  }
+
+  ng2-smart-table {
+    margin-top: 28px !important;
+  }
+}

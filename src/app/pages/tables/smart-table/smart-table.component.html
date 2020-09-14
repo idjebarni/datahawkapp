@@ -1,0 +1,111 @@
+<nb-card>
+    <nb-card-header>
+        Please select a file
+    </nb-card-header>
+<nb-card-body>
+    <nb-card style="
+    border: none;
+">
+        <nb-select placeholder="Select a file" (selectedChange)="getChosenFile($event)" status="primary">
+            <nb-option *ngFor="let option of this.files" [value]="option"> {{ option }}</nb-option>
+        </nb-select>
+    </nb-card>
+</nb-card-body>
+</nb-card>
+
+
+<nb-card>
+    <nb-card-header>
+        New entries in top 100
+    </nb-card-header>
+
+    <nb-card-body>
+        <div class="sort">
+        <div class="form-group">
+            <select class="position-select"
+                    #entryNew
+                    (change)='getEntryWeekNewProd(entryNew.value)'>
+                <option disabled selected value> -- select a week -- </option>
+                <option class='option'
+                        *ngFor='let option of this.weeks'
+                        [value]="option">{{option}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="position-select"
+                    #outputNew
+                    (change)='getOutputWeekNewProd(outputNew.value)'>
+                <option disabled selected value> -- select a week -- </option>
+                <option class='option'
+                        *ngFor='let option of this.weeks'
+                        [value]="option">{{option}}</option>
+            </select>
+        </div>
+            <button class="compare" [disabled]="entryNew.value === undefined && outputNew.value === undefined || outputNew.value === entryNew.value"  (click)="addedDataCompare()"  nbButton hero>
+                Compare
+            </button>
+        </div>
+
+        <ng2-smart-table mode="external" [settings]="addedProductsSettings" [source]="addedData">
+        </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
+
+<nb-card>
+    <nb-card-header>
+        Products which left the top 100
+    </nb-card-header>
+
+    <nb-card-body>
+        <div class="sort">
+        <div class="form-group">
+            <select class="position-select"
+                    #entryOld
+                    (change)='getEntryWeekOldProd(entryOld.value)'>
+                <option disabled selected value> -- select a week -- </option>
+                <option class='option'
+                        *ngFor='let option of this.weeks'
+                        [value]="option">{{option}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="position-select"
+                    #outputOld
+                    (change)='getOutputWeekOldProd(outputOld.value)'>
+                <option disabled selected value> -- select a week -- </option>
+                <option class='option'
+                        *ngFor='let option of this.weeks'
+                        [value]="option">{{option}}</option>
+            </select>
+        </div>
+
+        <button class="compare" [disabled]="entryOld.value === undefined && outputOld.value === undefined || outputOld.value === entryOld.value"  (click)="oldDataCompare()"  nbButton hero>
+            Compare
+        </button>
+        </div>
+        <ng2-smart-table mode="external" [settings]="removedProductsSettings" [source]="removedData">
+        </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
+
+<nb-card>
+    <nb-card-header>
+        Average Ranking
+    </nb-card-header>
+
+    <nb-card-body>
+        <ng2-smart-table mode="external" [settings]="averageRankingSettings" [source]="averageRankingData">
+        </ng2-smart-table>
+    </nb-card-body>
+</nb-card>
+
+<nb-card class="presenceRate">
+  <nb-card-header>
+      Top 10 presence rate
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table mode="external" [settings]="presenceRateSettings" [source]="presenceRateData">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
